@@ -56,3 +56,8 @@ app.post('/login', (req, res) => {
     res.render('login', { error: 'Invalid username or password' });
 }
 });
+
+//listen on the port specified above
+app.listen(port, () => {
+    console.log('Server is listening')
+});
