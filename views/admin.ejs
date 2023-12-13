@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <label><b>Country Information:</b></label>
+   <br><br>
+   <table style="width: 100%; background-color: antiquewhite; border: 1px solid black;">
+     <thead style="background-color: cornflowerblue; color: white;">
+       <tr>
+         <th style="text-align: left;">First Name</th>
+         <th style="text-align: left;">Last Name</th>
+         <th style="text-align: left;">Spouse First Name</th>
+         <th style="text-align: left;">Spouse Last Name</th>
+         <th style="text-align: left;">Building</th>
+         <th style="text-align: left;">Apartment</th>
+         <th style="text-align: left;">Phone Number</th>
+         <th style="text-align: left;">Spouse Phone Number</th>
+         <th style="text-align: left;">Email</th>
+         <th style="text-align: left;">Spouse Email</th>
+       </tr>
+     </thead>
+     <tbody style="font-family: Arial; font-size: 9pt;">
+      <% for (let iCount = 0; iCount < tenants.length; iCount++) { %>
+         <tr>
+           <td><%= tenants[iCount].Apartment %></td>
+           <td><%= tenants[iCount].FName %></td>
+           <td><%= tenants[iCount].LName %></td>
+           <td><%= tenants[iCount].Spouse_FName %></td>
+           <td><%= tenants[iCount].Spouse_LName %></td>
+           <td><%= tenants[iCount].PhoneNum %></td>
+           <td><%= tenants[iCount].Spouse_PhoneNum %></td>
+           <td><%= tenants[iCount].Email %></td>
+           <td><%= tenants[iCount].Spouse_Email %></td>
+           <!-- <td style="text-align: center;"></td>
+           <td style="text-align: center;"></td>
+           <td style="text-align: center;"> -->
+             <form action="/editTenant/<%= tenants[iCount].Apartment %>" method="GET">
+               <button type="submit">Edit</button>
+             </form>
+           </td>
+           <td style="text-align: center;">
+             <form action="/deleteCountry/<%= mycountry[iCount].Apartment %>" method="POST">
+               <button type="submit">Delete</button>
+             </form>
+           </td>
+         </tr>
+      <% } %>
+     </tbody>
+   </table>
+   <br><br>
+   <form action="/addCountry" method="GET">
+     <button type="submit">Add Country</button>
+   </form>
+</body>
+</html>
