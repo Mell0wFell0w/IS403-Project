@@ -4,23 +4,24 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>
+   <link href="styles.css" rel="stylesheet" />
 </head>
-<body>
-   <label><b>Country Information:</b></label>
+<body style="margin: 20px;">
    <br><br>
    <table style="width: 100%; background-color: antiquewhite; border: 1px solid black;">
-     <thead style="background-color: cornflowerblue; color: white;">
+     <thead style="background-color: navy; color: white;">
        <tr>
+         <th style="text-align: left;">Apartment</th>
          <th style="text-align: left;">First Name</th>
          <th style="text-align: left;">Last Name</th>
          <th style="text-align: left;">Spouse First Name</th>
          <th style="text-align: left;">Spouse Last Name</th>
-         <th style="text-align: left;">Building</th>
-         <th style="text-align: left;">Apartment</th>
-         <th style="text-align: left;">Phone Number</th>
+         <th></th>
+         <th></th>
+         <!-- <th style="text-align: left;">Phone Number</th>
          <th style="text-align: left;">Spouse Phone Number</th>
          <th style="text-align: left;">Email</th>
-         <th style="text-align: left;">Spouse Email</th>
+         <th style="text-align: left;">Spouse Email</th> -->
        </tr>
      </thead>
      <tbody style="font-family: Arial; font-size: 9pt;">
@@ -31,29 +32,22 @@
            <td><%= tenants[iCount].LName %></td>
            <td><%= tenants[iCount].Spouse_FName %></td>
            <td><%= tenants[iCount].Spouse_LName %></td>
-           <td><%= tenants[iCount].PhoneNum %></td>
-           <td><%= tenants[iCount].Spouse_PhoneNum %></td>
-           <td><%= tenants[iCount].Email %></td>
-           <td><%= tenants[iCount].Spouse_Email %></td>
-           <!-- <td style="text-align: center;"></td>
-           <td style="text-align: center;"></td>
-           <td style="text-align: center;"> -->
+           <td style="text-align: center;">
              <form action="/editTenant/<%= tenants[iCount].Apartment %>" method="GET">
-               <button type="submit">Edit</button>
+               <button type="submit" style="background-color: gainsboro; border: 1px solid black;">Edit</button>
              </form>
            </td>
            <td style="text-align: center;">
-             <form action="/deleteCountry/<%= mycountry[iCount].Apartment %>" method="POST">
-               <button type="submit">Delete</button>
+             <form action="/deleteTenant/<%= tenants[iCount].Apartment %>" method="POST">
+               <button type="submit" style="background-color: gainsboro; border: 1px solid black;">Delete</button>
              </form>
            </td>
          </tr>
       <% } %>
      </tbody>
    </table>
-   <br><br>
-   <form action="/addCountry" method="GET">
-     <button type="submit">Add Country</button>
+   <form action="/addTenant" method="GET">
+     <button type="submit" style="background-color: gainsboro; border: 1px solid black;">Add Tenant</button>
    </form>
 </body>
 </html>
