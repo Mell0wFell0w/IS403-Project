@@ -40,7 +40,7 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/admin', (req, res) => {
-    knex.select().from('tenants').then( country => {
+    knex.select().from('tenants').then( tenants => {
         res.render('admin', { tenants : tenants});
     })
 })
@@ -61,43 +61,60 @@ app.post('/login', (req, res) => {
 }
 }); 
 
-// app.get("/editTenant/:id", (req, res)=> {
-//     knex.select("Apartment",
-//                     "FName", 
-//                     "LName", 
-//                     'Spouse_FName', 
-//                     'Spouse_LName', 
-//                     'PhoneNum', 
-//                     'Spouse_PhoneNum', 
-//                     'Email', 
-//                     'Spouse_Email').from("tenants").where("Apartment", req.params.apartment).then(tenants => {
-//     res.render("editTenant", {tenants: tenants});
-//    }).catch( err => {
-//       console.log(err);
-//       res.status(500).json({err});
-//    });
-//  });
+app.get("/addTenant", (req, res) => {
+    res.render("addTenant");
+ })
+ app.post("/addTenant", (req, res)=> {
+    knex("tenants").insert({
+        Apartment: req.body.Apartment.toUpperCase(),
+        FName: req.body.FName.toUpperCase(),
+        LName: req.body.LName.toUpperCase(),
+        Spouse_FName: req.body.Spouse_FName.toUpperCase(),
+        Spouse_LName: req.body.Spouse_LName.toUpperCase(),
+   }).then(tenants => {
+      res.redirect("admin");
+   })
+ });
 
-//  app.post("/editTenant", (req, res)=> {
-//     knex("country").where("country_id", parseInt(req.body.country_id)).update({
-//       country_name: req.body.country_name.toUpperCase(),
-//       popular_site: req.body.popular_site.toUpperCase(),
-//       capital: req.body.capital.toUpperCase(),
-//       population: req.body.population,
-//       visited: req.body.visited ? "Y" : "N",
-//       covid_level: req.body.covid_level.toUpperCase()
-//    }).then(mycountry => {
-//       res.redirect("/");
-//    })
-//  });
+app.get("/editTenant/:Apartment", (req, res)=> {
+    knex.select("Apartment",
+                    "FName", 
+                    "LName", 
+                    'Spouse_FName', 
+                    'Spouse_LName').from("tenants").where("Apartment", req.params.Apartment).then(tenants => {
+    res.render("editTenant", {tenants: tenants});
+   }).catch( err => {
+      console.log(err);
+      res.status(500).json({err});
+   });
+ });
 
-//  app.post("/deleteCountry/:id", (req, res) => {
-//     knex("country").where("country_id",req.params.id).del().then( mycountry => {
-//       res.redirect("/");
-//    }).catch( err => {
-//       console.log(err);
-//       res.status(500).json({err});
-//    });
-//  });
+ app.post("/editTenant", (req, res)=> {
+    knex("tenants").where("Apartment", parseInt(req.body.apartment)).update({
+      Apartment: req.body.Apartment.toUpperCase(),
+      FName: req.body.FName.toUpperCase(),
+      LName: req.body.LName.toUpperCase(),
+      Spouse_FName: req.body.Spouse_FName.toUpperCase(),
+      Spouse_LName: req.body.Spouse_LName.toUpperCase(),
+   }).then(tenants => {
+      res.redirect("admin");
+   })
+ });
+
+ app.post("/deleteTenant/:Apartment", (req, res) => {
+    const { Apartment } = req.params;
+  
+    knex("tenants")
+      .where("Apartment", Apartment)
+      .del()
+      .then(() => {
+        // Redirect upon successful deletion
+        res.redirect("/admin");
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).json({ error: "Error deleting tenant" });
+      });
+  });
 
 app.listen(3000, () => console.log('Server is running'));
