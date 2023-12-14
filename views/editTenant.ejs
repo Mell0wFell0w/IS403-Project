@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="styles.css" rel="stylesheet" />
+    <style>
+        /* Center the form */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url("https://universe.byu.edu/wp-content/uploads/2016/03/YMountain_BYUPHoto-2.jpeg") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Box style for the form */
+        #myForm {
+            background-color: #ffffff; /* Set the solid color background */
+            border: 2px solid #333; /* Add a border */
+            padding: 20px;
+            max-width: 400px; /* Set maximum width */
+            width: 100%; /* Ensure the form takes full width within its container */
+        }
+
+        #myForm input {
+            border: 1px solid #070707;
+            padding: 8px;
+            margin-bottom: 10px;
+            width: calc(100% - 20px); /* Adjust input width */
+        }
+
+        #myForm label {
+            display: block; /* Display labels in block */
+            margin-bottom: 5px;
+        }
+
+        #myForm button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="myForm">
+        <form action="/editTenant" method="POST">
+            <label for="Apartment">Enter Apartment Number:</label>
+            <input id="Apartment" type="text" name="Apartment" value="<%=tenants[0].Apartment %>">
+            <br><br>
+            <label for="FName">Enter Tenant First Name:</label>
+            <input id="FName" type="text" name="FName" value="<%=tenants[0].FName %>">
+            <br><br>
+            <label for="LName">Enter Tenant Last Name:</label>
+            <input id="LName" type="text" name="LName" value="<%=tenants[0].LName %>">
+            <br><br>
+            <label for="Spouse_FName">Enter Spouse First Name:</label>
+            <input id="Spouse_FName" type="text" name="Spouse_FName" value="<%=tenants[0].Spouse_FName %>">
+            <br><br>
+            <label for="Spouse_LName">Enter Spouse Last Name:</label>
+            <input id="Spouse_LName" type="text" name="Spouse_LName" value="<%=tenants[0].Spouse_LName %>">
+            <br><br>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>
